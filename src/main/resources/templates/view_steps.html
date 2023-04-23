@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+
+<head th:replace="fragments :: html_head">
+</head>
+<body th:style="
+    'background: url(' + @{/images/add_recipe_img.jpg} + ') no-repeat center center fixed;' +
+    '-webkit-background-size: cover;' +
+    '-moz-background-size: cover;' +
+    '-o-background-size: cover;' +
+    'background-size: cover;'">
+    <div th:replace="fragments :: header">
+    </div>
+    <div class="container">
+        <div class="container mx-auto" style="width: 700px; margin: 5rem 0 6rem 0;">
+            <form method="POST" th:action="@{/recipe}" th:object="${recipe}">
+                <div class="bg-light border border-2 bg-opacity-75" style="padding: 3rem 2rem 3rem 2rem;">
+                    <div class="pb-4">
+                        <h2 class="text-center"><b>Method</b></h2>
+                    </div>
+                    <div th:utext="*{instruction}"></div>
+                    <input type="text" th:field="*{instruction}" th:value="*{instruction}" hidden>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

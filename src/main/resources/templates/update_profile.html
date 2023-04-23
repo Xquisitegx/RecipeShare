@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+
+<head th:replace="fragments :: html_head">
+</head>
+<body th:style="
+    'background: url(' + @{/images/bg_img.jpg} + ') no-repeat center center fixed;' +
+    '-webkit-background-size: cover;' +
+    '-moz-background-size: cover;' +
+    '-o-background-size: cover;' +
+    'background-size: cover;'">
+    <div th:replace="fragments :: header">
+    </div>
+    <div class="container my-4 d-flex" style="justify-content: center; align-items: center; height: 80vh;">
+        <div class="bg-light p-5" style="width: 40%;">
+            <form method="POST" th:action="@{/updateProfile}" class="form-signup">
+                <div th:object="${user}">
+                    <h2 class="text-center"><b>UPDATE PROFILE</b></h2>
+
+                    <div class="my-4 justify-content-center">
+                        <input type="hidden" th:value="${user.id}" name="id">
+
+                        <input type="hidden" th:value="${user.username}" name="username">
+
+                        <div class="row" style="height: 50px; display: flex; align-items: center;">
+                            <div class="col-5" style="text-align: right;">
+                                <label class="form-label" >First name</label>
+                            </div>
+                            <div class="col">
+                                <input type="text" th:field="*{firstName}" th:value="*{firstName}"/>
+                            </div>
+                        </div>
+
+                        <div class="row" style="height: 50px; display: flex; align-items: center;">
+                            <div class="col-5" style="text-align: right;">
+                                <label class="form-label">Last name</label>
+                            </div>
+                            <div class="col">
+                                <input type="text" th:field="*{lastName}" th:value="*{lastName}"/>
+                            </div>
+                        </div>
+
+                        <div class="row"  style="height: 50px; display: flex; align-items: center;">
+                            <div class="col-5" style="text-align: right;">
+                                <label class="form-label">Email</label>
+                            </div>
+                            <div class="col">
+                                <input type="text" th:field="*{email}" th:value="*{email}"/>
+                            </div>
+                        </div>
+
+                        <input type="hidden" th:value="${user.password}" name="password">
+
+                        <div class="row" style="height: 50px; display: flex; align-items: center;">
+                            <div class="col-5" style="text-align: right;">
+                                <label class="form-label">Address</label>
+                            </div>
+                            <div class="col">
+                                <input type="text" th:field="*{address}" th:value="*{address}"/>
+                            </div>
+                        </div>
+
+                        <input type="hidden" th:value="${user.birthday}" name="birthday">
+                    </div>
+                    <div class="d-grid col-8 mx-auto">
+                        <button type="submit" class="btn btn-dark">Submit</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+</div>
+</body>
+</html>

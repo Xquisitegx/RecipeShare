@@ -1,0 +1,42 @@
+[
+    {
+        "username": "user",
+        "firstname": "user",
+        "lastname": "user",
+        "password": "ps",
+        "email": "user@gmail.com",
+        "address": "130 User st."
+    },
+    {
+        "username": "hoonie",
+        "firstname": "Seunghun",
+        "lastname": "Yim",
+        "password": "ps",
+        "email": "yimsh@gmail.com",
+        "address": "8 Gaslight Ct."
+    },
+    {
+        "username": "dannoy",
+        "firstname": "Danny",
+        "lastname": "Nguyen",
+        "password": "ps",
+        "email": "danny@gmail.com",
+        "address": "123 Dundas st."
+    },
+    {
+        "username": "yoonie",
+        "firstname": "Yoonhee",
+        "lastname": "Kim",
+        "password": "ps",
+        "email": "yoonie@gmail.com",
+        "address": "232 Jarvis st."
+    },
+    {
+        "username": "lisa",
+        "firstname": "Elizaveta",
+        "lastname": "Vygovskaia",
+        "password": "ps",
+        "email": "liz@gmail.com",
+        "address": "3433 Richmond st."
+    }
+]

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments :: html_head">
+</head>
+<body style="
+    background: url('images/bg_img.jpg') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+">
+    <div th:replace="fragments :: header">
+    </div>
+    <div class="d-flex" style="justify-content: center; align-items: center; height: 90vh;">
+
+        <form method="POST" th:action="@{/login}" class="form-signin">
+
+            <div class="bg-light" style="border-radius: 5%; padding: 2rem 5rem;">
+                <h2 class="text-center"><b>LOGIN</b></h2>
+
+                <label class="form-label pt-3" for="username">User Name</label>
+                <input id="username" name="username" type="text" class="form-control" placeholder="Username"
+                       autofocus="true"/>
+                <label class="form-label pt-3" for="password">Password</label>
+                <input id="password" name="password" type="password" class="form-control mb-3" placeholder="********"/>
+
+                <div class="alert alert-danger text-center mt-3" th:if="${param.error}" >
+                  Invalid Username or Password
+                </div>
+                <div class="alert alert-success text-center mt-3" th:if="${param.password_reset_success}" >
+                  Successfully reset password!
+                </div>
+                <div class="alert alert-danger text-center mt-3" th:if="${param.password_reset_error}" >
+                    Password reset failed..
+                </div>
+
+                <div class="d-grid mx-auto">
+                  <button type="submit" class="btn btn-dark">Sign In</button>
+                </div>
+
+                <div class="d-grid mx-auto pt-3 text-center">
+                    <a class="text-reset" href="/loadForgotPassword">Forgot Password?</a>
+                    <h6 class="pt-2">or</h6>
+                </div>
+                <div class="d-grid mx-auto pt-1 text-center">
+                  <h6>Need an account?</h6>
+                  <a class="text-reset" href="/signup">Sign Up</a>
+                </div>
+
+          </div>
+
+        </form>
+
+    </div>
+</body>
+</html>

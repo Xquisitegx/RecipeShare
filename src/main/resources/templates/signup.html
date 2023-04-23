@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments :: html_head">
+</head>
+<body style="
+    background: url('images/bg_img.jpg') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;">
+    <div th:replace="fragments :: header">
+    </div>
+    <div class="container my-4" style="justify-content: center; align-items: center; width: 40%;">
+        <form method="POST" th:action="@{/signup}" th:object="${user}" class="form-signup">
+            <th:block th:if="${session.msg}">
+                <p class="text-center fs-4 text-success">[[${session.msg}]]</p>
+                <th:block th:text="${#session.removeAttribute('msg')}"></th:block>
+            </th:block>
+            <div class="bg-light p-5" style="border-radius: 5%;">
+
+                <h2 class="text-center"><b>SIGN UP</b></h2>
+
+                <label class="form-label pt-3" for="username">Username</label>
+                <input id="username" name="username" type="text" class="form-control" placeholder="Username" />
+
+                <label class="form-label pt-3" for="firstname">First name</label>
+                <input id="firstname" name="firstName" type="text" class="form-control mb-3" placeholder="First name" />
+
+                <label class="form-label pt-3" for="lastname">Last name</label>
+                <input id="lastname" name="lastName" type="text" class="form-control mb-3" placeholder="Last Name" />
+
+                <label class="form-label pt-3" for="email">Email</label>
+                <input id="email" name="email" type="email" class="form-control mb-3" placeholder="Email" />
+
+                <label class="form-label pt-3" for="password">Password</label>
+                <input id="password" name="password" type="password" class="form-control mb-3" placeholder="********" />
+
+                <label class="form-label pt-3" for="address">Address</label>
+                <input id="address" name="address" type="text" class="form-control mb-3" placeholder="5700 Yonge St." />
+
+                <label class="form-label pt-3" for="birthday">Date of Birth</label>
+                <input id="birthday" name="birthday" type="date" class="form-control mb-3" />
+
+                <div class="d-grid col-8 mx-auto">
+                    <button type="submit" class="btn btn-dark">Submit</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

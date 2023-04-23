@@ -1,0 +1,72 @@
+#intro {
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
+#intro img {
+    position: relative;
+    width: 1296px;
+}
+
+#intro_cont {
+    position: absolute;
+    top: 45vh;
+    z-index: 1;
+}
+
+#intro_cont h1 {
+    font-size: 35pt;
+    font-weight: bold;
+    color: white;
+}
+#intro_cont h3 {
+    font-size: 20pt;
+    font-weight: lighter;
+    color: white;
+    display: flex;
+    justify-content: center;
+}
+
+#intro_cont a {
+    display: flex;
+    justify-content: center;
+    text-decoration: none;
+}
+
+#intro_cont button {
+    border-radius: 10px;
+    width: 200px;
+}
+
+#recipe_sec {
+}
+
+#recipe_box {
+    border: 2px solid #f3f3f3;
+    margin: 1rem;
+    display: flex;
+}
+
+#view_recipe img {
+    width: 350px !important;
+    height: auto !important;
+}
+
+.view_prof_col1 {
+    text-align: end;
+    font-weight: normal;
+    padding-right: 1rem;
+}
+
+#detail_recipe h3 {
+    font-weight: bold;
+}
+
+#view_plan td {
+    vertical-align: middle;
+}
+
+input[type="file"] {
+    display: none;
+}

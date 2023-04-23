@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org/"
+        xmlns:sec="https://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="fragments :: html_head">
+</head>
+<body>
+<div th:replace="fragments :: header">
+</div>
+<div class="container">
+    <div class="container" style="margin: 5rem 0 6rem 0;">
+        <div>
+            <h2 class="text-center mb-2"><b>Select the Recipe to view the list</b></h2>
+        </div>
+        <div id="recipe_sec">
+            <div id="view_recipe">
+                <div th:each="shopping : ${shoppings}" id="recipe_box">
+                    <a th:href="*{'/viewMyShoppingLists/' + shopping.id}"><img th:src="*{'data:image/*;charset=utf-8;base64,' + shopping.recipe.imageFile}"></a>
+                    <div class="m-3" style="display: flex;">
+                        <div style="width: 60%">
+                            <div th:text="*{shopping.recipe.name}" style="font-size: 20pt; font-weight: bold;"></div>
+                            <div th:text="*{shopping.recipe.description}" class="mt-1"></div>
+                        </div>
+                        <div class="ms-4" style="font-size: 10pt; width: 40%">
+                            <ol style="list-style-type: decimal-leading-zero;">
+                                <li th:each="ingredient : ${shopping.recipe.ingredients}">
+                                    <span th:text="*{ingredient.name}"></span>
+                                    <span th:text="*{ingredient.amount}"></span>
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

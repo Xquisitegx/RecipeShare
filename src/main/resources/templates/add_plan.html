@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments :: html_head">
+</head>
+<body style="
+    background: url('images/add_recipe_img.jpg') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;">
+
+    <div th:replace="fragments :: header">
+    </div>
+    <div  class="container my-4" style="justify-content: center; align-items: center; width: 40%;">
+        <form method="POST" th:action="@{/addPlan}" th:object="${plan}" class="form-signup">
+            <div class="bg-light p-5 bg-opacity-75">
+
+                <h2 class="text-center"><b>ADD MEAL PLAN</b></h2>
+
+                <label class="form-label pt-3" for="date">Date</label>
+                <input id="date" name="date" type="date" class="form-control mb-3" th:field="*{date}" th:attr="min=${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}" required/>
+                <label class="form-label pt-3" for="meal_time">Meal Time</label>
+
+                <select id="meal_time" name="meal_time" class="form-control mb-3" th:field="*{mealTime}" required>
+                    <option value="breakfast">Breakfast</option>
+                    <option value="lunch">Lunch</option>
+                    <option value="dinner">Dinner</option>
+                </select>
+
+                <div th:object="${recipes}">
+                    <label class="form-label pt-3" for="recipe">Recipe</label>
+                    <select id="recipe" name="recipeid" class="form-control mb-3" required>
+                        <option value="" disabled selected hidden>Select Recipe</option>
+                        <option th:each="recipe, i : ${recipes}" th:value="${recipe.id}" th:text="${recipe.name}"></option>
+                    </select>
+                </div>
+                <div class="d-grid col-8 mx-auto">
+                    <input type="submit" name="submit" value="Create a Plan" class="btn btn-dark mt-4" />
+                </div>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

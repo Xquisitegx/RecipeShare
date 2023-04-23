@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments :: html_head">
+</head>
+<body style="
+    background: url('images/add_recipe_img.jpg') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;">
+
+    <div th:replace="fragments :: header">
+    </div>
+    <div class="container mx-auto" style="width: 700px; margin: 5rem 0 6rem 0;">
+        <form method="POST" th:action="@{/addRecipe}" th:object="${recipe}" class="form-signup" enctype="multipart/form-data">
+            <div class="bg-light p-5 bg-opacity-75">
+                <h2 class="text-center"><b>ADD RECIPE</b></h2>
+
+                <label class="form-label pt-3" for="name">Recipe Name</label>
+                <input id="name" name="name" type="text" class="form-control mb-3" th:field="*{name}" placeholder="Recipe Name" />
+
+                <label class="form-label pt-3" for="description">Description</label>
+                <textarea id="description" name="description" type="text" class="form-control mb-3" th:field="*{description}" placeholder="Description"></textarea>
+
+                <label class="form-label pt-3" for="instruction">Instruction</label>
+                <textarea id="instruction" name="instruction" type="text" class="form-control mb-3" th:field="*{instruction}" placeholder="Instruction"></textarea>
+
+                <label class="form-label pt-3">Ingredients</label>
+
+                <div style="display: flex; justify-content: center;" class="mb-2">
+                    <div class="d-grid col-4 mx-1">
+                        <input type="submit" name="addbox" value="Add Ingredient Box" class="btn btn-dark btn-sm" />
+                    </div>
+                    <div class="d-grid col-2 mx-1">
+                        <input type="submit" name="deletebox" value="Delete" class="btn btn-dark btn-sm" />
+                    </div>
+                </div>
+                <ol>
+                    <li th:each="ingredient, i : *{ingredients}" style="list-style-type: decimal-leading-zero;" class="mt-2">
+                        <div style="display: flex;">
+                            <input type="text" class="form-control" th:field="*{ingredients[__${i.index}__].name}" th:value="*{ingredients[__${i.index}__].name}" placeholder="ex) Onion"></input>
+                            <input type="text" class="form-control ms-1" th:field="*{ingredients[__${i.index}__].amount}" th:value="*{ingredients[__${i.index}__].amount}" placeholder="ex) 300g"></input>
+                        </div>
+                    </li>
+                </ol>
+
+                <label class="btn btn-dark" style="display: inline-block;">
+                    <input id="image" type="file" name="image" accept="image/*" class="mt-3"/>
+                    Choose File
+                </label>
+
+                <div class="d-grid col-4 mx-auto mt-4">
+                    <input type="submit" name="submit" value="Add Recipe" class="btn btn-success mt-3 rounded-pill"/>
+                </div>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

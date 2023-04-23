@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org/"
+        xmlns:sec="https://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="fragments :: html_head">
+</head>
+<body>
+    <div th:replace="fragments :: header">
+    </div>
+    <div class="container">
+        <div id="intro" sec:authorize="isAnonymous()">
+            <img th:src="@{images/main_img.jpg}" >
+            <div id="intro_cont">
+                <h3>Share your experience with people</h3>
+                <h1>What are your favorite Recipes?</h1>
+                <a href="/login"><button class="btn btn-lg btn-danger mt-3">Get Started</button></a>
+            </div>
+        </div>
+
+
+        <div th:if="${param.filter} == null">
+            <h1 class="text-center mt-5"><b>Recipes for You</b></h1>
+        </div>
+        <div th:unless="${param.filter} == null">
+            <div th:if="${#strings.toString(param.filter)} == 'myRecipes' or ${#strings.toString(param.filter)} == 'favoriteRecipes'">
+                <div th:if="${#strings.toString(param.filter)} == 'myRecipes'">
+                    <h1 class="text-center mt-5"><b>My Recipes</b></h1>
+                </div>
+                <div th:if="${#strings.toString(param.filter)} == 'favoriteRecipes'">
+                    <h1 class="text-center mt-5"><b>Favorite Recipes</b></h1>
+                </div>
+            </div>
+            <div th:unless="${#strings.toString(param.filter)} == 'myRecipes' or ${#strings.toString(param.filter)} == 'favoriteRecipes'">
+                <h1 class="text-center mt-5"><b th:text="'Search Result' + ' : ' + ${param.filter}"></b></h1>
+            </div>
+        </div>
+
+        <form method="POST" th:action="@{/searchRecipeByName}">
+            <div class="p-1 border border-2 border-dark rounded-pill my-5" style="width: 50%; margin: 0 auto;">
+                <div class="input-group">
+                    <input type="search" name="recipename" placeholder="Search the Recipe" aria-describedby="button-addon2" class="form-control border-0 mx-2">
+                    <div class="input-group-prepend">
+                        <button id="button-addon2" type="submit" class="btn rounded-pill btn-dark py-2 px-5">SEARCH</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <div id="recipe_sec">
+            <div id="view_recipe">
+                <div th:each="recipe : ${recipes}" id="recipe_box">
+                    <a th:href="${'/recipe/' + recipe.id}"><img th:src="${'data:image/*;charset=utf-8;base64,' + recipe.imageFile}"></a>
+
+                    <div class="m-3" style="display: flex;">
+                        <div style="width: 60%">
+                            <div th:text="*{recipe.name}" style="font-size: 20pt; font-weight: bold;"></div>
+                            <div th:text="*{recipe.description}" class="mt-1"></div>
+                        </div>
+                        <div class="ms-4" style="font-size: 10pt; width: 40%">
+                            <ol style="list-style-type: decimal-leading-zero;">
+                                <li th:each="ingredient, i : *{recipe.ingredients}">
+                                    <span th:text="*{recipe.ingredients[__${i.index}__].name}"></span>
+                                    <span th:text="*{recipe.ingredients[__${i.index}__].amount}"></span>
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

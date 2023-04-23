@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+
+<head th:replace="fragments :: html_head">
+</head>
+<body>
+    <div th:replace="fragments :: header">
+    </div>
+    <div class="container">
+        <div class="container mx-auto" style="width: 700px; margin: 5rem 0 6rem 0;">
+            <form method="POST">
+                <div class="pb-1">
+                    <h2 class="text-center"><b>Shopping List for the Recipe</b></h2>
+                </div>
+                <div class="text-center fs-4" th:text="': '+${shopping.recipe.name}"></div>
+                <div class="bg-light border border-2" style="padding: 3rem 3rem 2rem 3rem; margin-top: 1.5rem;">
+                    <div th:if="${recipeIngredients.size()} > 0" class="row justify-content-center">
+                        <div class="row justify-content-center">
+                            <div class="col-4">
+                                <select id="ingredient" name="ingredientId" class="form-control mb-3" required>
+                                    <option value="" disabled selected hidden>Select Ingredient</option>
+                                    <option th:each="ingredient : ${recipeIngredients}" th:value="*{ingredient.id}" th:text="${ingredient.name}"></option>
+                                </select>
+                            </div>
+                            <div class="col-2">
+                                <button class="btn btn-dark" type="submit">Add</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row justify-content-center" th:each="ingredient : ${shopping.ingredients}">
+                        <div class="row" style="height: 50px; display: flex; align-items: center; text-align: center;">
+                            <div class="col">
+                                <div th:text="*{ingredient.name}"></div>
+                            </div>
+                            <div class="col">
+                                <div th:text="*{ingredient.amount}"></div>
+                            </div>
+                            <div class="col">
+                                <a th:href="*{'/viewMyShoppingLists/' + shopping.id + '/deleteIngredient/' + ingredient.id}" class="btn btn-danger">Delete</a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <hr>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-end">
+                        <a th:href="${'/viewMyShoppingLists/' + shopping.id + '/export'}" class="btn btn-success btn-sm">Export list as CSV</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

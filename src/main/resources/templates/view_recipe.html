@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+
+<head th:replace="fragments :: html_head">
+</head>
+<body>
+    <div th:replace="fragments :: header">
+    </div>
+    <div class="container" style="padding: 5rem 10rem;">
+        <form method="POST" th:action="@{/recipe}" th:object="${recipe}">
+            <div style="display: flex;">
+                <div style="width: 400px;">
+                    <img th:src="${'data:image/*;charset=utf-8;base64,' + recipe.imageFile}" style="width: 400px;">
+
+                    <input type="text" th:field="*{imageFile}" th:value="*{imageFile}" hidden>
+                    <input type="text" th:field="*{id}" th:value="*{id}" hidden>
+                    <input type="text" th:field="*{user.id}" th:value="*{user.id}" hidden>
+
+                    <div th:text="*{name}" style="font-size: 30pt; font-weight: bold;"></div>
+                    <input type="text" th:field="*{name}" th:value="*{name}" hidden>
+                    <div style="display: flex; justify-content: center;">
+                        <button th:unless="${isFavorite} or ${param.added}" type="submit" class="btn btn-outline-success mt-3" style="width: 210px;">Add Favorite!</button>
+                        <button th:if="${param.added}" class="btn btn-success mt-3" style="width: 210px;" disabled>Successfully added</button>
+
+                    </div>
+                </div>
+                <div id="detail_recipe" class="ms-4">
+                    <h3>Description</h3>
+                    <div th:text="*{description}"></div>
+                    <input type="text" th:field="*{description}" th:value="*{description}" hidden>
+
+                    <div class="d-flex justify-content-center mt-3">
+                        <a th:href="@{/recipe/{id}/addShopping(id=*{id})}" class="btn btn-dark mx-1 px-4 py-2">Ingredients List</a>
+                        <a th:href="@{/recipe/{id}/viewSteps(id=*{id})}" class="btn btn-dark mx-1 px-4 py-2">Method</a>
+                        <a th:if="${#authorization.authentication.name} == ${#strings.toString(user.username)}" th:href="*{'/updateRecipe/' + id}" class="btn btn-dark mx-1 px-4 py-2">Edit Ingredients</a>
+                    </div>
+
+                    <input type="text" th:field="*{instruction}" th:value="*{instruction}" hidden>
+                    <div th:each="ingredient, i : *{ingredients}">
+                        <input type="text" class="form-control mb-3" th:field="*{ingredients[__${i.index}__].name}" th:value="*{ingredients[__${i.index}__].name}" hidden>
+                        <input type="text" class="form-control mb-3" th:field="*{ingredients[__${i.index}__].amount}" th:value="*{ingredients[__${i.index}__].amount}" hidden>
+                    </div>
+
+                </div>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

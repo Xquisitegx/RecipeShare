@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org/">
+
+<head th:replace="fragments :: html_head">
+</head>
+<body>
+<div th:replace="fragments :: header">
+</div>
+<div>
+    <div class="container" style="justify-content: center; align-items: center; width: 70%">
+        <div class="row">
+            <h1 class="text-center mt-5"><b>Events</b></h1>
+            <div style="display: flex; justify-content: end;">
+                <a class="nav-link" href="/addEvent">
+                    <button class="btn btn-dark">Add Event</button>
+                </a>
+            </div>
+            <div>
+                <table class="table" id="view_plan">
+                    <tr>
+                        <th>Date</th>
+                        <th>Event Name</th>
+                        <th>Recipe</th>
+                        <th></th>
+                    </tr>
+                    <tr th:each="event : ${events}">
+                        <td th:text="*{event.date}"></td>
+                        <td th:text="*{event.eventName}"></td>
+                        <td><a th:href="${'/recipe/' + event.recipe.id}" style="text-decoration: none; color: black;">
+                            <div th:text="*{event.recipe.name}"></div>
+                        </a></td>
+                        <td>
+                            <a th:href="'/updateEvent/' + ${event.id}">
+                                <button class="btn btn-danger btn-sm">UPDATE</button>
+                            </a>
+                            <a th:href="'/deleteEvent/' + ${event.id}">
+                                <button class="btn btn-danger btn-sm">DELETE</button>
+                            </a></td>
+
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
